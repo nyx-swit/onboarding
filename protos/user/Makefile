@@ -1,5 +1,5 @@
 proto:
-	protoc -I ${GOPATH}/src/swit/nyx-grpc-user-golang/protos/user/v1 \
+	protoc -I ${GOPATH}/src/nyx/onboarding-github/protos/user \
            --go_out ./ --go_opt paths=source_relative \
            --go-grpc_out ./ --go-grpc_opt paths=source_relative \
            --grpc-gateway_out ./ \
