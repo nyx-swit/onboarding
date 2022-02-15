@@ -3,21 +3,12 @@ package v1.user;
 option go_package = "/protos/user/v1";
 
 service UserService {
-  rpc GetUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse){}
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse){}
 }
 
 message User{
   string id = 1;
   string user_name = 2;
-}
-
-message GetUserProfileRequest{
-  string id = 1;
-}
-
-message GetUserProfileResponse{
-  User data = 1;
 }
 
 message CreateUserRequest{
