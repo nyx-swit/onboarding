@@ -1,14 +1,12 @@
-package user_v4
+package v1
 
 import (
-	"google.golang.org/grpc"
-	"github.com/nyx-swit/onboarding/config"
-	"swit/swit-configs-library-golang/env"
+	"github.com/nyx-swit/onboarding/config/env"
 )
 
 // Namespace : version
 // Copy 이후 환경 변수명 체크 필.
-func getGRPCClientConn() *grpc.ClientConn {
+func getGRPCClientConn()  {
 
 	env.GetString("USER_SVC")
 	/*
