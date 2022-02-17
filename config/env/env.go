@@ -1,4 +1,4 @@
-package config
+package env
 
 var ENV = []byte(`
 	API_SERVICE_ADDR=localhost
