@@ -48,5 +48,8 @@ message LoginUserRequest{
 }
 
 message LoginUserResponse {
-  string id = 1;
+  string access_token = 1;
+  string refresh_token = 2;
+  string id = 3;
+  string name = 4;
 }
