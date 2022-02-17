@@ -50,4 +50,5 @@ message LoginUserRequest{
 message LoginUserResponse {
   string id = 1;
   string name = 2;
+  string pass = 3;
 }
