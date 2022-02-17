@@ -19,7 +19,7 @@ func AuthClientProvider() AuthServiceClient {
 		IP:   "localhost",
 		Port: "50053",
 	}
-
+	//test
 	add := fmt.Sprintf("%s:%s", a.IP, a.Port)
 	conn, err := grpc.DialContext(context.Background(), add,
 		grpc.WithChainUnaryInterceptor(
