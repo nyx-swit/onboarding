@@ -1,0 +1,12 @@
+package config
+
+var ENV = []byte(`
+	API_SERVICE_ADDR=localhost
+	API_SERVICE_PORT=50051
+	
+	USER_SERVICE_ADDR=localhost
+	USER_SERVICE_PORT=50052
+
+	AUTH_SERVICE_ADDR=localhost
+	AUTH_SERVICE_PORT=50053
+`)
