@@ -14,7 +14,7 @@ type Address struct {
 	Port string
 }
 
-func UserClientProvider() AuthServiceClient {
+func AuthClientProvider() AuthServiceClient {
 	a := Address{
 		IP:   "localhost",
 		Port: "50053",
