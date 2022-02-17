@@ -1,5 +1,5 @@
 syntax = "proto3";
-package v1.auth;
+package auth;
 option go_package = "/protos/auth";
 
 service AuthService{
