@@ -4,7 +4,7 @@
 // - protoc             v3.19.4
 // source: auth.proto
 
-package v1
+package auth
 
 import (
 	context "context"
