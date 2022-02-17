@@ -1,0 +1,18 @@
+syntax = "proto3";
+package v1.auth;
+option go_package = "/protos/auth/v1";
+
+service AuthService{
+  rpc addUserLogin (AddUserLoginRequest) returns (LoginResponse) {}
+}
+
+message AddUserLoginRequest {
+  string id = 1;
+  string pass = 2;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string user_id = 3;
+}
