@@ -2,11 +2,11 @@
 // source: auth.proto
 
 /*
-Package auth is a reverse proxy.
+Package v1 is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package auth
+package v1
 
 import (
 	"context"
@@ -77,7 +77,7 @@ func RegisterAuthServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/auth.AuthService/AddUserLogin", runtime.WithHTTPPathPattern("/auth.AuthService/addUserLogin"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.auth.AuthService/AddUserLogin", runtime.WithHTTPPathPattern("/v1.auth.AuthService/addUserLogin"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -139,7 +139,7 @@ func RegisterAuthServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/auth.AuthService/AddUserLogin", runtime.WithHTTPPathPattern("/auth.AuthService/addUserLogin"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/v1.auth.AuthService/AddUserLogin", runtime.WithHTTPPathPattern("/v1.auth.AuthService/addUserLogin"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -159,7 +159,7 @@ func RegisterAuthServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_AuthService_AddUserLogin_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"auth.AuthService", "addUserLogin"}, ""))
+	pattern_AuthService_AddUserLogin_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1.auth.AuthService", "addUserLogin"}, ""))
 )
 
 var (
