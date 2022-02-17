@@ -1,14 +1,10 @@
 package v1
 
-import (
-	"github.com/nyx-swit/onboarding/config/env"
-)
-
 // Namespace : version
 // Copy 이후 환경 변수명 체크 필.
 func getGRPCClientConn() {
 
-	env.GetString("USER_SVC")
+	//env.GetString("USER_SVC")
 	/*
 		a := client.Address{
 			IP:        env.GetString("USER_SVC"),
