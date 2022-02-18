@@ -1,0 +1,17 @@
+syntax = "proto3";
+package v1.channel;
+option go_package = "/protos/channel/v1";
+
+service ChannelService{
+  rpc getListChannel (getListChannelRequest) returns (getListChannelResponse){}
+}
+
+message getListChannelRequest {
+
+}
+
+message getListChannelResponse {
+  string id = 1;
+  string name = 2;
+  string status = 3;
+}
