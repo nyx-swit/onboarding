@@ -3,17 +3,21 @@ package v1.channel_member;
 option go_package = "/protos/channel_member/v1";
 
 service ChannelMemberService{
-  rpc getListChannelMember (getListChannelMemberRequest) returns (getListChannelMemberResponse){}
+  rpc GetListChannelMember (GetListChannelMemberRequest) returns (GetListChannelMemberResponse){}
 }
 
-message getListChannelMemberRequest {
+message GetListChannelMemberRequest {
   string channel_id = 1;
-  string user_id = 2;
 }
 
-message getListChannelMemberResponse {
+message ChannelMemberModel{
   string id = 1;
   string channel_id = 2;
   string user_id = 3;
-  string status = 4;
+  string user_name = 4;
+  string status = 5;
+}
+
+message GetListChannelMemberResponse {
+  repeated ChannelMemberModel channel_member_items = 1;
 }

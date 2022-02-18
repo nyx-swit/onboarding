@@ -77,7 +77,7 @@ func RegisterChannelServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.channel.ChannelService/GetListChannel", runtime.WithHTTPPathPattern("/v1.channel.ChannelService/getListChannel"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1.channel.ChannelService/GetListChannel", runtime.WithHTTPPathPattern("/v1.channel.ChannelService/GetListChannel"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -139,7 +139,7 @@ func RegisterChannelServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/v1.channel.ChannelService/GetListChannel", runtime.WithHTTPPathPattern("/v1.channel.ChannelService/getListChannel"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/v1.channel.ChannelService/GetListChannel", runtime.WithHTTPPathPattern("/v1.channel.ChannelService/GetListChannel"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -159,7 +159,7 @@ func RegisterChannelServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 }
 
 var (
-	pattern_ChannelService_GetListChannel_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1.channel.ChannelService", "getListChannel"}, ""))
+	pattern_ChannelService_GetListChannel_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1.channel.ChannelService", "GetListChannel"}, ""))
 )
 
 var (

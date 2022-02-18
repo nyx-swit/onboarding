@@ -3,15 +3,19 @@ package v1.channel;
 option go_package = "/protos/channel/v1";
 
 service ChannelService{
-  rpc getListChannel (getListChannelRequest) returns (getListChannelResponse){}
+  rpc GetListChannel (GetListChannelRequest) returns (GetListChannelResponse){}
 }
 
-message getListChannelRequest {
+message GetListChannelRequest {
 
 }
 
-message getListChannelResponse {
+message ChannelModel {
   string id = 1;
   string name = 2;
   string status = 3;
+}
+
+message GetListChannelResponse {
+  repeated ChannelModel channel_items = 1;
 }

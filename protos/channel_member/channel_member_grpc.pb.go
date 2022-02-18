@@ -35,7 +35,7 @@ func NewChannelMemberServiceClient(cc grpc.ClientConnInterface) ChannelMemberSer
 
 func (c *channelMemberServiceClient) GetListChannelMember(ctx context.Context, in *GetListChannelMemberRequest, opts ...grpc.CallOption) (*GetListChannelMemberResponse, error) {
 	out := new(GetListChannelMemberResponse)
-	err := c.cc.Invoke(ctx, "/v1.channel_member.ChannelMemberService/getListChannelMember", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/v1.channel_member.ChannelMemberService/GetListChannelMember", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _ChannelMemberService_GetListChannelMember_Handler(srv interface{}, ctx con
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/v1.channel_member.ChannelMemberService/getListChannelMember",
+		FullMethod: "/v1.channel_member.ChannelMemberService/GetListChannelMember",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChannelMemberServiceServer).GetListChannelMember(ctx, req.(*GetListChannelMemberRequest))
@@ -96,7 +96,7 @@ var ChannelMemberService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ChannelMemberServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "getListChannelMember",
+			MethodName: "GetListChannelMember",
 			Handler:    _ChannelMemberService_GetListChannelMember_Handler,
 		},
 	},
