@@ -1,5 +1,5 @@
 syntax = "proto3";
-package v1.channel;
+package v1.channel_message;
 option go_package = "/protos/channel_message/v1";
 
 service ChannelMessageService{

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package v1.channel;
+package v1.channel_member;
 option go_package = "/protos/channel_member/v1";
 
 service ChannelMemberService{
@@ -8,6 +8,7 @@ service ChannelMemberService{
 
 message getListChannelMemberRequest {
   string channel_id = 1;
+  string user_id = 2;
 }
 
 message getListChannelMemberResponse {
