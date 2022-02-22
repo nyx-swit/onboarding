@@ -3,7 +3,8 @@ package v1.channel_message;
 option go_package = "/protos/channel_message/v1";
 
 service ChannelMessageService{
-  rpc GetListChannel (GetListChannelMessageRequest) returns (GetListChannelMessageResponse){}
+  rpc GetListChannelMessage (GetListChannelMessageRequest) returns (GetListChannelMessageResponse){}
+  rpc SetChannelMessage (SetChannelMessageRequest) returns (SetChannelMessageResponse){}
 }
 
 message GetListChannelMessageRequest {
@@ -20,4 +21,16 @@ message ChannelMessageModel {
 
 message GetListChannelMessageResponse{
   repeated ChannelMessageModel channel_message_items = 1;
+}
+
+message SetChannelMessageRequest {
+  string id = 1;
+  string channel_id = 2;
+  string user_id = 3;
+  string comment = 4;
+  string status = 5;
+}
+
+message SetChannelMessageResponse {
+
 }

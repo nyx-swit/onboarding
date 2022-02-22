@@ -22,7 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ChannelMessageServiceClient interface {
-	GetListChannel(ctx context.Context, in *GetListChannelMessageRequest, opts ...grpc.CallOption) (*GetListChannelMessageResponse, error)
+	GetListChannelMessage(ctx context.Context, in *GetListChannelMessageRequest, opts ...grpc.CallOption) (*GetListChannelMessageResponse, error)
+	SetChannelMessage(ctx context.Context, in *SetChannelMessageRequest, opts ...grpc.CallOption) (*SetChannelMessageResponse, error)
 }
 
 type channelMessageServiceClient struct {
@@ -33,9 +34,18 @@ func NewChannelMessageServiceClient(cc grpc.ClientConnInterface) ChannelMessageS
 	return &channelMessageServiceClient{cc}
 }
 
-func (c *channelMessageServiceClient) GetListChannel(ctx context.Context, in *GetListChannelMessageRequest, opts ...grpc.CallOption) (*GetListChannelMessageResponse, error) {
+func (c *channelMessageServiceClient) GetListChannelMessage(ctx context.Context, in *GetListChannelMessageRequest, opts ...grpc.CallOption) (*GetListChannelMessageResponse, error) {
 	out := new(GetListChannelMessageResponse)
-	err := c.cc.Invoke(ctx, "/v1.channel_message.ChannelMessageService/GetListChannel", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/v1.channel_message.ChannelMessageService/GetListChannelMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *channelMessageServiceClient) SetChannelMessage(ctx context.Context, in *SetChannelMessageRequest, opts ...grpc.CallOption) (*SetChannelMessageResponse, error) {
+	out := new(SetChannelMessageResponse)
+	err := c.cc.Invoke(ctx, "/v1.channel_message.ChannelMessageService/SetChannelMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +56,8 @@ func (c *channelMessageServiceClient) GetListChannel(ctx context.Context, in *Ge
 // All implementations must embed UnimplementedChannelMessageServiceServer
 // for forward compatibility
 type ChannelMessageServiceServer interface {
-	GetListChannel(context.Context, *GetListChannelMessageRequest) (*GetListChannelMessageResponse, error)
+	GetListChannelMessage(context.Context, *GetListChannelMessageRequest) (*GetListChannelMessageResponse, error)
+	SetChannelMessage(context.Context, *SetChannelMessageRequest) (*SetChannelMessageResponse, error)
 	mustEmbedUnimplementedChannelMessageServiceServer()
 }
 
@@ -54,8 +65,11 @@ type ChannelMessageServiceServer interface {
 type UnimplementedChannelMessageServiceServer struct {
 }
 
-func (UnimplementedChannelMessageServiceServer) GetListChannel(context.Context, *GetListChannelMessageRequest) (*GetListChannelMessageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetListChannel not implemented")
+func (UnimplementedChannelMessageServiceServer) GetListChannelMessage(context.Context, *GetListChannelMessageRequest) (*GetListChannelMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetListChannelMessage not implemented")
+}
+func (UnimplementedChannelMessageServiceServer) SetChannelMessage(context.Context, *SetChannelMessageRequest) (*SetChannelMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetChannelMessage not implemented")
 }
 func (UnimplementedChannelMessageServiceServer) mustEmbedUnimplementedChannelMessageServiceServer() {}
 
@@ -70,20 +84,38 @@ func RegisterChannelMessageServiceServer(s grpc.ServiceRegistrar, srv ChannelMes
 	s.RegisterService(&ChannelMessageService_ServiceDesc, srv)
 }
 
-func _ChannelMessageService_GetListChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ChannelMessageService_GetListChannelMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetListChannelMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChannelMessageServiceServer).GetListChannel(ctx, in)
+		return srv.(ChannelMessageServiceServer).GetListChannelMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/v1.channel_message.ChannelMessageService/GetListChannel",
+		FullMethod: "/v1.channel_message.ChannelMessageService/GetListChannelMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChannelMessageServiceServer).GetListChannel(ctx, req.(*GetListChannelMessageRequest))
+		return srv.(ChannelMessageServiceServer).GetListChannelMessage(ctx, req.(*GetListChannelMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChannelMessageService_SetChannelMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetChannelMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChannelMessageServiceServer).SetChannelMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.channel_message.ChannelMessageService/SetChannelMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChannelMessageServiceServer).SetChannelMessage(ctx, req.(*SetChannelMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +128,12 @@ var ChannelMessageService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ChannelMessageServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetListChannel",
-			Handler:    _ChannelMessageService_GetListChannel_Handler,
+			MethodName: "GetListChannelMessage",
+			Handler:    _ChannelMessageService_GetListChannelMessage_Handler,
+		},
+		{
+			MethodName: "SetChannelMessage",
+			Handler:    _ChannelMessageService_SetChannelMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

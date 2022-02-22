@@ -23,6 +23,7 @@ message GetListChannelResponse {
 
 message CreateCahnnelRequest{
   string name = 1;
+  string user_id = 2;
 }
 
 message CreateChannelResponse{
