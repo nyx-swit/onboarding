@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ChannelServiceClient interface {
+	CreateChannel(ctx context.Context, in *CreateCahnnelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error)
 	GetListChannel(ctx context.Context, in *GetListChannelRequest, opts ...grpc.CallOption) (*GetListChannelResponse, error)
 }
 
@@ -31,6 +32,15 @@ type channelServiceClient struct {
 
 func NewChannelServiceClient(cc grpc.ClientConnInterface) ChannelServiceClient {
 	return &channelServiceClient{cc}
+}
+
+func (c *channelServiceClient) CreateChannel(ctx context.Context, in *CreateCahnnelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error) {
+	out := new(CreateChannelResponse)
+	err := c.cc.Invoke(ctx, "/v1.channel.ChannelService/CreateChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *channelServiceClient) GetListChannel(ctx context.Context, in *GetListChannelRequest, opts ...grpc.CallOption) (*GetListChannelResponse, error) {
@@ -46,6 +56,7 @@ func (c *channelServiceClient) GetListChannel(ctx context.Context, in *GetListCh
 // All implementations must embed UnimplementedChannelServiceServer
 // for forward compatibility
 type ChannelServiceServer interface {
+	CreateChannel(context.Context, *CreateCahnnelRequest) (*CreateChannelResponse, error)
 	GetListChannel(context.Context, *GetListChannelRequest) (*GetListChannelResponse, error)
 	mustEmbedUnimplementedChannelServiceServer()
 }
@@ -54,6 +65,9 @@ type ChannelServiceServer interface {
 type UnimplementedChannelServiceServer struct {
 }
 
+func (UnimplementedChannelServiceServer) CreateChannel(context.Context, *CreateCahnnelRequest) (*CreateChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateChannel not implemented")
+}
 func (UnimplementedChannelServiceServer) GetListChannel(context.Context, *GetListChannelRequest) (*GetListChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetListChannel not implemented")
 }
@@ -68,6 +82,24 @@ type UnsafeChannelServiceServer interface {
 
 func RegisterChannelServiceServer(s grpc.ServiceRegistrar, srv ChannelServiceServer) {
 	s.RegisterService(&ChannelService_ServiceDesc, srv)
+}
+
+func _ChannelService_CreateChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCahnnelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChannelServiceServer).CreateChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.channel.ChannelService/CreateChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChannelServiceServer).CreateChannel(ctx, req.(*CreateCahnnelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ChannelService_GetListChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -95,6 +127,10 @@ var ChannelService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "v1.channel.ChannelService",
 	HandlerType: (*ChannelServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateChannel",
+			Handler:    _ChannelService_CreateChannel_Handler,
+		},
 		{
 			MethodName: "GetListChannel",
 			Handler:    _ChannelService_GetListChannel_Handler,
