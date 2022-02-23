@@ -15,8 +15,9 @@ message ChannelMessageModel {
   string id = 1;
   string channel_id = 2;
   string user_id = 3;
-  string comment = 4;
-  string status = 5;
+  string user_name = 4;
+  string comment = 5;
+  string status = 6;
 }
 
 message GetListChannelMessageResponse{
